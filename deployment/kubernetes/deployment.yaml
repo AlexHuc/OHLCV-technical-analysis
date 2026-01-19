@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ohlcv-prediction
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ohlcv-prediction-config
+  namespace: ohlcv-prediction
+data:
+  FLASK_ENV: "production"
+  MODEL_PATH: "/app/models"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ohlcv-prediction-deployment
+  namespace: ohlcv-prediction
+  labels:
+    app: ohlcv-prediction
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ohlcv-prediction
+  template:
+    metadata:
+      labels:
+        app: ohlcv-prediction
+    spec:
+      containers:
+      - name: ohlcv-prediction
+        image: ohlcv-predictor:latest
+        imagePullPolicy: IfNotPresent  # Minikube builds locally
+        ports:
+        - containerPort: 9696
+          name: http
+        envFrom:
+        - configMapRef:
+            name: ohlcv-prediction-config
+        resources:
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9696
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9696
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ohlcv-prediction-service
+  namespace: ohlcv-prediction
+  labels:
+    app: ohlcv-prediction
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 9696
+    nodePort: 30081
+    protocol: TCP
+    name: http
+  selector:
+    app: ohlcv-prediction
