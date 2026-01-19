@@ -1,6 +1,10 @@
 # Python virtual env
 OHLCV_tech_venv
 
+# Exclude the Deep Learning model files
+models/horizontal_unet.pth
+models/unet_ray.pth
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
