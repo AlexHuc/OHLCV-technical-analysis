@@ -3,7 +3,7 @@
 This folder contains the trained deep learning models for predicting **support lines** in OHLCV chart images.  
 Models are stored as `.pth` files compatible with PyTorch and can be loaded directly for inference.
 
-![ChartPatternRecognition](../imgs/chart_pattern_recognition.png)
+![ChartPatternRecognition](../imgs/chart_pattern_recognition.jpeg)
 
 ## 📂 Models Included
 
