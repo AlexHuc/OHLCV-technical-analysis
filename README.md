@@ -1,6 +1,10 @@
 # OHLCV Technical Analysis - Chart Pattern Recognition
 
-![OHLCV Technical Analysis](./imgs/ohlcv_technical.png)
+### Example of Input --> Models --> Outputs
+![OHLCV Technical Analysis](./imgs/ohlcv_technical_model.png)
+
+### Expected Output
+![OHLCV Technical Analysis](./imgs/ohlcv_technical_expected.png)
 
 ## Description of the Problem
 

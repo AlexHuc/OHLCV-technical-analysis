@@ -414,15 +414,15 @@ INPUT_DIR = os.path.join(DATASET_ROOT, "input")
 HORIZONTAL_DIR = os.path.join(DATASET_ROOT, "target_horizontal")
 RAY_DIR = os.path.join(DATASET_ROOT, "target_ray")
 
-print("Input images:", len(glob(INPUT_DIR + "/*.png")))
-print("Horizontal targets:", len(glob(HORIZONTAL_DIR + "/*.png")))
-print("Ray targets:", len(glob(RAY_DIR + "/*.png")))
+print("Input images:", len(glob.glob(INPUT_DIR + "/*.png")))
+print("Horizontal targets:", len(glob.glob(HORIZONTAL_DIR + "/*.png")))
+print("Ray targets:", len(glob.glob(RAY_DIR + "/*.png")))
 
 
 # ### Verify filename alignment
-input_files = sorted(glob(INPUT_DIR + "/*.png"))
-h_files = sorted(glob(HORIZONTAL_DIR + "/*.png"))
-r_files = sorted(glob(RAY_DIR + "/*.png"))
+input_files = sorted(glob.glob(INPUT_DIR + "/*.png"))
+h_files = sorted(glob.glob(HORIZONTAL_DIR + "/*.png"))
+r_files = sorted(glob.glob(RAY_DIR + "/*.png"))
 
 input_names = [os.path.basename(f) for f in input_files]
 h_names = [os.path.basename(f) for f in h_files]
@@ -747,7 +747,7 @@ def validate(model, loader, criterion, device):
 
 
 # ### Training lool (Horizontal Model)
-num_epochs = 10
+num_epochs = 40
 
 for epoch in range(num_epochs):
     train_loss = train_one_epoch(
@@ -804,7 +804,7 @@ criterion_ray = BCEDiceLoss()
 
 
 # ### Training loop (Ray Model)
-num_epochs = 10
+num_epochs = 40
 
 for epoch in range(num_epochs):
     train_loss = train_one_epoch(
