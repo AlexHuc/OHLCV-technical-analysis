@@ -1,11 +1,10 @@
-'''
 # Dataset Folder - OHLCV Technical Analysis
 
 This folder contains the datasets used for training and testing the deep learning models for chart pattern recognition (horizontal and ray support lines).
 
 ## Folder Structure
 
-'''
+```
 dataset/
 ├── train/
 │   ├── full                # Full chart images or combined data for training
@@ -17,7 +16,7 @@ dataset/
 ├── test/
 │   └── input               # Input images for testing the trained models
 └── README.md               # This file
-'''
+```
 
 ## Description
 
@@ -39,4 +38,3 @@ dataset/
 
 - During model training, `train/input` images are paired with either `mask_horizontal` or `mask_ray` depending on the model.  
 - `test/input` images are used to generate predictions and visually compare them with expected support patterns.  
-'''
